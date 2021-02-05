@@ -22,7 +22,7 @@
         
         h1,
         h2 {
-            border-bottom: rgb(122, 122, 122) solid 2px;
+            border-bottom: rgb(122, 122, 122) solid 1px;
             padding-bottom: 10px;
             color: rgb(122, 122, 122);
         }
@@ -127,13 +127,13 @@
                     <a class="edit-btn" id="editor-open">Edit</a>
                     <a class="edit-btn" id="viewer-open" style="display: none;">View</a>
 
-                    <span id="OpenedFile">Editting: None</span>
+                    <span id="OpenedFile" style="margin-left: 10px;">Editting: None</span>
                 </div>
 
                 <div id="editor" style="display: none;">
                     <textarea name="type" id="typing-box" cols="30" rows="35" style="width: 100%;" spellcheck="true"></textarea>
                 </div>
-                <div id="viewer">
+                <div id="viewer" style="padding-bottom: 20px;">
                     <span id="md-box">Click "Open" or "New" to edit a file.</span>
                 </div>
             </div>
