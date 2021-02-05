@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer: Home</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+    <script src="https://c-zero.web.app/js/brickjs.js" defer></script>
+
+    <link rel="stylesheet" href="https://c-zero.web.app/css/base.css">
+    <link rel="stylesheet" href="https://c-zero.web.app/css/grid.css">
+
+    <style>
+        textarea {
+            background: none;
+            outline: none;
+            resize: none;
+            border: none;
+        }
+        
+        h1,
+        h2 {
+            border-bottom: rgb(122, 122, 122) solid 2px;
+            padding-bottom: 10px;
+            color: rgb(122, 122, 122);
+        }
+        
+        h3 {
+            color: rgb(122, 122, 122);
+        }
+        
+        pre {
+            background: rgb(248, 248, 248);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        blockquote {
+            border-left: lightgray solid 2px;
+            padding-left: 10px;
+        }
+        
+        span,
+        p {
+            color: rgb(122, 122, 122);
+        }
+        
+        a:not(.edit-btn) {
+            padding: 5px;
+            text-decoration: none;
+            background-color: rgb(249, 249, 249);
+            color: rgb(122, 122, 122);
+            transition: background-color 0.15s;
+        }
+        
+        a:not(.edit-btn):hover {
+            background-color: whitesmoke;
+        }
+        
+        .edit-btn {
+            background-color: whitesmoke;
+            width: clamp(55px, 3.5vw, 200px);
+            font-size: 1.7vh;
+            padding: 10px;
+            text-decoration: none;
+            color: rgb(90, 90, 90);
+            transition: all 0.15s;
+            display: inline-block;
+            text-align: center;
+            border-radius: 3px;
+        }
+        
+        .edit-btn:not(.disabled):not(:active):hover {
+            background-color: rgb(233, 233, 233);
+            transform: scale(1.05);
+        }
+        
+        .edit-btn:active {
+            transform: scale(0.98);
+            background-color: rgb(233, 233, 233);
+        }
+        
+        .edit-btn.disabled {
+            cursor: not-allowed;
+            background-color: rgb(216, 216, 216);
+        }
+        
+        .buttons {
+            padding: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.05), 0 0.5px 9px 0 rgba(0, 0, 0, 0.13);
+            box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.05), 0 1px 9px 0 rgba(0, 0, 0, 0.13);
+            transition: all 0.15s;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+        <div class="map grid-full-wide" style="background-color: whitesmoke;"></div>
+
+        <div class="main-content grid-full-wide animate--bottom" style="background-color: white">
+            <div class="page-container">
+                <div class="buttons" style="margin-bottom: 5px;">
+                    <a class="edit-btn" id="FileOpen">Open</a>
+                    <a class="edit-btn" id="FileSave">Save</a>
+                    <a class="edit-btn" id="FileSaveAs">Save As</a>
+                    <a class="edit-btn" id="FileBlank">New</a>
+
+                    <a class="edit-btn" id="editor-open">Edit</a>
+                    <a class="edit-btn" id="viewer-open" style="display: none;">View</a>
+
+                    <span id="OpenedFile">Editting: None</span>
+                </div>
+
+                <div id="editor" style="display: none;">
+                    <textarea name="type" id="typing-box" cols="30" rows="35" style="width: 100%;" spellcheck="true"></textarea>
+                </div>
+                <div id="viewer">
+                    <span id="md-box">Click "Open" or "New" to edit a file.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="files.js" defer></script>
+    <script>
+        document.getElementById("typing-box").addEventListener('input', () => {
+            find("#md-box").innerHTML = marked(find("#typing-box").value)
+        })
+
+        document.getElementById("editor-open").addEventListener('click', () => {
+            display(find("#editor"), true, "block")
+            display(find("#viewer"), false)
+
+            display(find("#viewer-open"), true, "inline-block")
+            display(find("#editor-open"), false)
+
+            find("#md-box").innerHTML = marked(find("#typing-box").value)
+        })
+
+        document.getElementById("viewer-open").addEventListener('click', () => {
+            display(find("#viewer"), true, "block")
+            display(find("#editor"), false)
+
+            display(find("#editor-open"), true, "inline-block")
+            display(find("#viewer-open"), false)
+
+            find("#md-box").innerHTML = marked(find("#typing-box").value)
+        })
+    </script>
+</body>
+
+</html>
