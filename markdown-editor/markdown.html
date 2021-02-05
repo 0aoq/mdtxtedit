@@ -95,6 +95,20 @@
             transition: all 0.15s;
             user-select: none;
         }
+        
+        iframe {
+            border-radius: 5px;
+            transition: all 0.15s;
+            width: clamp(250px, 25vw, 500px);
+            height: 315px;
+            border: none;
+        }
+        
+        iframe:hover {
+            -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.05), 0 0.5px 9px 0 rgba(0, 0, 0, 0.13);
+            box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.05), 0 1px 9px 0 rgba(0, 0, 0, 0.13);
+            transform: scale(1.02);
+        }
     </style>
 </head>
 
