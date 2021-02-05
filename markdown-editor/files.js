@@ -152,9 +152,6 @@ async function writeFile(fileHandle, contents) {
     const writable = await fileHandle.createWritable();
     await writable.write(contents);
     await writable.close();
-
-    const file = await fileHandle.getFile()
-    document.title = "Viewer: Viewing " + file.name
 }
 
 async function writeFileAs() {
@@ -168,9 +165,6 @@ async function writeFileAs() {
 
     fileHandle = handle
     OpenedFile.innerHTML = "Opened: New File"
-
-    const file = await fileHandle.getFile()
-    document.title = "Viewer: Viewing " + file.name
 
     OpenedFile.innerHTML = "Opened: " + await file.name
 
